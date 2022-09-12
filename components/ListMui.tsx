@@ -11,8 +11,9 @@ import SendIcon from '@mui/icons-material/Send';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import StarBorder from '@mui/icons-material/StarBorder';
+import { INVOICES } from '../interfaces/invoices';
 
-export default function ListMui(data) {
+export default function ListMui({users}: Array<String>) {
   const [open, setOpen] = React.useState(true);
 
   const handleClick = () => {
@@ -29,17 +30,20 @@ export default function ListMui(data) {
         <ListItemIcon>
           <InboxIcon />
         </ListItemIcon>
-        <ListItemText primary="Inbox" />
+        <ListItemText primary="COMPANY" />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
+    { data.map((e) => {
           <ListItemButton sx={{ pl: 4 }}>
             <ListItemIcon>
               <StarBorder />
             </ListItemIcon>
-            <ListItemText primary="Starred" />
+            <ListItemText primary={e.COMPANYTOINVOICE} />
           </ListItemButton>
+           })
+}
         </List>
       </Collapse>
     </List>

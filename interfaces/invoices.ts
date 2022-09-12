@@ -1,4 +1,5 @@
 export interface INVOICES {
+  push(COMPANYTOINVOICE: string): unknown;
   length: number;
   headers: string,
   ISSUE_ID: number;
@@ -33,4 +34,9 @@ export interface INVOICES {
   CLINICPROFILEKEY: string | number;
   CREDITPRICE: number;
   USECREDITSFORTHISCASE: string;
+}
+
+
+export interface USERS {
+  name: string
 }

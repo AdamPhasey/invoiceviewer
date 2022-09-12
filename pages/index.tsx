@@ -1,11 +1,11 @@
 import Head from "next/head";
 import { INVOICES } from "../interfaces/invoices";
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import ListMui from "../components/ListMui";
 
 const Home = () => {
   const [invoices, setInvoices] = useState<INVOICES[]>();
-  const [users, setUsers] = useState<INVOICES[]>();
+  const [users, setUsers] = useState<Array<String>>();
 
   useEffect(() => {
     async function fetchData() {
@@ -14,15 +14,19 @@ const Home = () => {
       setInvoices(res);
     }
     fetchData();
-  });
+    getAllUsers();
+  }, []);
 
   function getAllUsers() {
     if (invoices) {
-      let data = []
+      let data: Array<String> = [];
       for (let i = 0; i < invoices.length; i++) {
-      data.push(invoices[i].COMPANYTOINVOICE)
+        if (!data.includes(invoices[i].COMPANYTOINVOICE)) {
+          data.push(invoices[i].COMPANYTOINVOICE);
+        }
       }
-      setUsers(data)
+      setUsers(data);
+      console.log(data);
     }
   }
 
@@ -40,7 +44,7 @@ const Home = () => {
           <h1 className="text-3xl">
             Please select your company from the list below:
           </h1>
-          <ListMui data={users} />
+          {users && <ListMui users={users} />}
         </div>
       </main>
 
