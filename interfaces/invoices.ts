@@ -1,4 +1,5 @@
 export interface INVOICES {
+  length: number;
   headers: string,
   ISSUE_ID: number;
   FIRSTCLOSUREDATE: Date;
